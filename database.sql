@@ -250,22 +250,16 @@ CREATE TABLE Session_Attendance (
 
 CREATE TABLE Sale_Transaction (
     Transaction_Id INT AUTO_INCREMENT PRIMARY KEY,
-
+    Transaction_Date DATE NOT NULL, -- THIS IS THE NEW COLUMN
     Quantity INT NOT NULL,
     Unit_Price DECIMAL(10,2) NOT NULL,
-
     Customer_Id VARCHAR(8) NOT NULL,
     Employee_Id VARCHAR(8) NOT NULL,
     Product_Id VARCHAR(8) NOT NULL,
 
-    FOREIGN KEY (Customer_Id)
-        REFERENCES Customer(Customer_Id),
-
-    FOREIGN KEY (Employee_Id)
-        REFERENCES Employee(Employee_Id),
-
-    FOREIGN KEY (Product_Id)
-        REFERENCES Product(Product_Id)
+    FOREIGN KEY (Customer_Id) REFERENCES Customer(Customer_Id),
+    FOREIGN KEY (Employee_Id) REFERENCES Employee(Employee_Id),
+    FOREIGN KEY (Product_Id) REFERENCES Product(Product_Id)
 );
 
 
@@ -554,26 +548,19 @@ VALUES
 
 
 --Inserting sample data into Sale_Transaction table
-INSERT INTO Sale_Transaction
-(
-    Quantity,
-    Unit_Price,
-    Customer_Id,
-    Employee_Id,
-    Product_Id
-)
+INSERT INTO Sale_Transaction 
+(Transaction_Date, Quantity, Unit_Price, Customer_Id, Employee_Id, Product_Id)
 VALUES
-(1,10000.00,'C001','E001','P001'),
-(1,15000.00,'C002','E001','P002'),
-(2,1000.00,'C003','E003','P003'),
-(1,150000.00,'C004','E005','P004'),
-(1,10000.00,'C005','E002','P005'),
-(2,5000.00,'C006','E006','P006'),
-(1,25000.00,'C007','E007','P007'),
-(1,75000.00,'C008','E008','P008'),
-(2,35000.00,'C009','E009','P009'),
-(3,4000.00,'C010','E010','P010');
-
+('2026-05-15', 1, 10000.00, 'C001', 'E001', 'P001'),
+('2026-05-18', 1, 15000.00, 'C002', 'E001', 'P002'),
+('2026-05-20', 2, 1000.00, 'C003', 'E003', 'P003'),
+('2026-04-10', 1, 150000.00, 'C004', 'E005', 'P004'),
+('2026-05-25', 1, 10000.00, 'C005', 'E002', 'P005'),
+('2026-03-12', 2, 5000.00, 'C006', 'E006', 'P006'),
+('2026-05-30', 1, 25000.00, 'C007', 'E007', 'P007'),
+('2026-02-14', 1, 75000.00, 'C008', 'E008', 'P008'),
+('2026-05-05', 2, 35000.00, 'C009', 'E009', 'P009'),
+('2026-01-20', 3, 4000.00, 'C010', 'E010', 'P010');
 
 --Displaying all records to test the tables and data if created
 SELECT * FROM Customer;
@@ -606,3 +593,76 @@ IDENTIFIED BY 'Admin123!';
 CREATE USER 'sales_user'@'localhost'
 IDENTIFIED BY 'Sales123!';
 
+
+
+
+
+--Task 5
+
+-- Task 5a  Update price using a subquery
+UPDATE Product
+SET Product_Price = Product_Price * 1.10
+WHERE Category_Id IN (
+    SELECT Category_Id 
+    FROM Product_Category 
+    WHERE Category_Name = 'Gardening Tools'
+);
+
+-- Verify the update
+SELECT Product_Name, Category_Id, Product_Price 
+FROM Product 
+WHERE Category_Id = 'PC007';
+
+
+-- Task 5b Using NOT EXISTS (Anti-Join)
+SELECT 
+    p1.Product_Name, 
+    pc.Category_Name AS Type, 
+    p1.Product_Price, 
+    p1.Product_Description
+FROM Product p1
+JOIN Product_Category pc ON p1.Category_Id = pc.Category_Id
+WHERE pc.Category_Name IN ('Plant', 'Gardening Tools', 'Accessory')
+  AND NOT EXISTS (
+      SELECT 1 
+      FROM Product p2 
+      WHERE p2.Category_Id = p1.Category_Id 
+        AND p2.Product_Price > p1.Product_Price
+  );
+
+  -- Task 5c: Total sales for May 2026, 
+SELECT 
+    pc.Category_Name,
+    SUM(st.Quantity) AS Total_Quantity_Sold,
+    SUM(st.Quantity * st.Unit_Price) AS Total_Revenue
+FROM Sale_Transaction st
+JOIN Product p ON st.Product_Id = p.Product_Id
+JOIN Product_Category pc ON p.Category_Id = pc.Category_Id
+WHERE st.Transaction_Date >= '2026-05-01' AND st.Transaction_Date <= '2026-05-31'
+GROUP BY pc.Category_Name
+ORDER BY Total_Revenue DESC;
+
+-- Task 5d: Upcoming workshops/events within the next month with participant counts
+SELECT 
+    s.Session_Title, 
+    s.Session_Date, 
+    s.Session_Time, 
+    COUNT(sa.Session_Attendance_Id) AS Registered_Participants
+FROM Session s
+LEFT JOIN Session_Attendance sa ON s.Session_Id = sa.Session_Id
+WHERE s.Session_Date BETWEEN '2026-06-01' AND '2026-07-01' 
+GROUP BY s.Session_Id, s.Session_Title, s.Session_Date, s.Session_Time
+ORDER BY s.Session_Date ASC, s.Session_Time ASC;
+
+-- Task 5e: Rank employees by total revenue generated up to a specific date
+SELECT 
+    e.Employee_Id,
+    e.Employee_Firstname, 
+    e.Employee_Lastname,
+    SUM(st.Quantity * st.Unit_Price) AS Total_Revenue_Generated,
+    RANK() OVER (ORDER BY SUM(st.Quantity * st.Unit_Price) DESC) AS Revenue_Rank
+FROM Employee e
+JOIN Sale_Transaction st ON e.Employee_Id = st.Employee_Id
+WHERE st.Transaction_Date <= '2026-06-01' -- Specific date chosen to capture all sample data
+GROUP BY e.Employee_Id, e.Employee_Firstname, e.Employee_Lastname
+ORDER BY Revenue_Rank ASC;
