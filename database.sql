@@ -263,6 +263,24 @@ CREATE TABLE Sale_Transaction (
 );
 
 
+DESC Customer;
+DESC Employee_Role;
+DESC Employee_Qualification;
+DESC Employee;
+DESC Supplier;
+DESC Product_Category;
+DESC Product;
+DESC Training;
+DESC Employee_Training;
+DESC Session_Type;
+DESC Session;
+DESC Equipment;
+DESC Session_Employee;
+DESC Session_Equipment;
+DESC Session_Attendance;
+DESC Sale_Transaction;
+
+
 
 
 -- Inserting sample data into Customer table
