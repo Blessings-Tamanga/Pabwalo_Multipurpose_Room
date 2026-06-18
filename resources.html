@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources | Pabwalo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+:root{
+    --green:#0E5D46;
+    --gold:#F7B733;
+    --orange:#D97706;
+    --brown:#6B4226;
+    --black:#111111;
+    --white:#ffffff;
+    --bg:#ffffff;
+    --bg-alt:#f9f9f9;
+    --text:#111111;
+    --text-muted:#555555;
+    --card:#ffffff;
+    --border:#e0e0e0;
+    --shadow:rgba(0,0,0,.08);
+}
+
+[data-theme="dark"]{
+    --bg:#0d0d0d;
+    --bg-alt:#1a1a1a;
+    --text:#ffffff;
+    --text-muted:#aaaaaa;
+    --card:#1a1a1a;
+    --border:#2a2a2a;
+    --shadow:rgba(0,0,0,.4);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    transition:background .4s, color .4s;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:15px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:.4s;
+    background:transparent;
+}
+
+header.scrolled{
+    background:var(--card);
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    padding:12px 8%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    z-index:1001;
+}
+
+.logo img{
+    height:50px;
+    width:auto;
+    object-fit:contain;
+    transition:.3s;
+    filter:brightness(0) invert(1);
+}
+
+header.scrolled .logo img{
+    filter:none;
+}
+
+nav{
+    display:flex;
+    gap:35px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    transition:.3s;
+    position:relative;
+    font-size:0.95rem;
+}
+
+header.scrolled nav a{
+    color:var(--text);
+}
+
+nav a:hover{
+    color:var(--gold);
+}
+
+.dropdown{
+    position:relative;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:var(--card);
+    min-width:220px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:10px;
+    opacity:0;
+    transform:translateY(-10px);
+    transition:all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+}
+
+.dropdown-content a{
+    color:var(--text);
+    padding:12px 20px;
+    display:block;
+    border-bottom:1px solid var(--border);
+    font-weight:400;
+    font-size:0.9rem;
+}
+
+.dropdown-content a:last-child{
+    border-bottom:none;
+}
+
+.dropdown-content a:hover{
+    background:var(--green);
+    color:white;
+    padding-left:25px;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    z-index:1001;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(255,255,255,.1);
+    color:white;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+    font-size:0.95rem;
+}
+
+header.scrolled .icon-btn{
+    background:var(--bg-alt);
+    border-color:var(--border);
+    color:var(--text);
+}
+
+.icon-btn:hover{
+    background:var(--gold);
+    color:var(--black);
+    border-color:var(--gold);
+    transform:translateY(-2px);
+}
+
+.join-btn{
+    padding:10px 22px;
+    background:var(--gold);
+    color:var(--black);
+    border:none;
+    border-radius:50px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-size:0.9rem;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+
+.join-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(247,183,51,.3);
+}
+
+.search-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    backdrop-filter:blur(10px);
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:opacity .3s;
+}
+
+.search-overlay.active{
+    display:flex;
+    opacity:1;
+}
+
+.search-box{
+    width:90%;
+    max-width:700px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:20px 60px 20px 25px;
+    font-size:1.3rem;
+    border:none;
+    border-radius:50px;
+    background:var(--card);
+    color:var(--text);
+    outline:none;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.search-close{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    font-size:1.5rem;
+    color:var(--text-muted);
+    cursor:pointer;
+}
+
+.search-close:hover{
+    color:var(--gold);
+}
+
+.menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    z-index:1001;
+}
+
+.menu-toggle span{
+    width:25px;
+    height:3px;
+    background:white;
+    transition:.3s;
+    border-radius:3px;
+}
+
+header.scrolled .menu-toggle span{
+    background:var(--text);
+}
+
+/* ==========================
+   RESOURCES HERO
+========================== */
+
+.resources-hero{
+    position:relative;
+    width:100%;
+    min-height:60vh;
+    display:flex;
+    align-items:center;
+    padding:120px 8% 80px;
+    background:linear-gradient(135deg, var(--green) 0%, var(--brown) 100%);
+    overflow:hidden;
+}
+
+.resources-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(circle at 20% 80%, rgba(247,183,51,.15), transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(247,183,51,.1), transparent 50%);
+    z-index:1;
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+    color:white;
+}
+
+.hero-content span{
+    display:inline-block;
+    color:var(--gold);
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    margin-bottom:15px;
+}
+
+.hero-content h1{
+    font-size:clamp(2.5rem, 6vw, 5rem);
+    line-height:1.1;
+    margin-bottom:20px;
+    font-weight:800;
+}
+
+.hero-content p{
+    font-size:1.1rem;
+    line-height:1.8;
+    opacity:0.95;
+    max-width:600px;
+}
+
+/* ==========================
+   SECTION HEADER
+========================== */
+
+.section-header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-header span{
+    color:var(--orange);
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+}
+
+.section-header h2{
+    font-size:2.5rem;
+    margin-top:10px;
+    color:var(--text);
+}
+
+/* ==========================
+   RESOURCE CATEGORIES
+========================== */
+
+.resource-categories{
+    padding:120px 8%;
+    background:var(--bg-alt);
+}
+
+.categories-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:30px;
+}
+
+.category-card{
+    background:var(--card);
+    padding:40px 30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+    border:1px solid var(--border);
+    transition:.4s;
+    cursor:pointer;
+}
+
+.category-card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+    border-color:var(--gold);
+}
+
+.category-icon{
+    width:80px;
+    height:80px;
+    background:linear-gradient(135deg, var(--green), var(--brown));
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:2.5rem;
+    margin:0 auto 20px;
+}
+
+.category-card h3{
+    font-size:1.3rem;
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.category-card p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.category-count{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--black);
+    padding:6px 15px;
+    border-radius:50px;
+    font-size:0.85rem;
+    font-weight:600;
+}
+
+/* ==========================
+   GALLERY SECTION
+========================== */
+
+.gallery-section{
+    padding:120px 8%;
+    background:var(--bg);
+}
+
+.gallery-filters{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:50px;
+    flex-wrap:wrap;
+}
+
+.filter-btn{
+    padding:10px 25px;
+    background:transparent;
+    border:2px solid var(--border);
+    color:var(--text);
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+    font-size:0.9rem;
+}
+
+.filter-btn.active, .filter-btn:hover{
+    background:var(--green);
+    color:white;
+    border-color:var(--green);
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:20px;
+}
+
+.gallery-item{
+    position:relative;
+    height:280px;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 10px 30px var(--shadow);
+    transition:.4s;
+}
+
+.gallery-item:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+}
+
+.gallery-image{
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg, var(--green), var(--brown));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:3rem;
+    transition:.5s;
+    position:relative;
+}
+
+.gallery-item:hover .gallery-image{
+    transform:scale(1.1);
+}
+
+.gallery-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(14,93,70,.9);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:.3s;
+}
+
+.gallery-item:hover .gallery-overlay{
+    opacity:1;
+}
+
+.gallery-info{
+    text-align:center;
+    color:white;
+}
+
+.gallery-info h4{
+    font-size:1.1rem;
+    margin-bottom:8px;
+}
+
+.gallery-info p{
+    font-size:0.85rem;
+    opacity:0.9;
+}
+
+/* ==========================
+   PUBLICATIONS SECTION
+========================== */
+
+.publications-section{
+    padding:120px 8%;
+    background:var(--bg-alt);
+}
+
+.publications-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:30px;
+}
+
+.publication-card{
+    background:var(--card);
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 30px var(--shadow);
+    border:1px solid var(--border);
+    transition:.4s;
+}
+
+.publication-card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+}
+
+.publication-image{
+    width:100%;
+    height:220px;
+    background:linear-gradient(135deg, var(--green), var(--brown));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:2.5rem;
+}
+
+.publication-content{
+    padding:25px;
+}
+
+.publication-type{
+    display:inline-block;
+    background:rgba(247,183,51,.2);
+    color:var(--orange);
+    padding:5px 15px;
+    border-radius:20px;
+    font-size:0.75rem;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.publication-content h3{
+    font-size:1.2rem;
+    color:var(--text);
+    margin-bottom:10px;
+    line-height:1.4;
+}
+
+.publication-meta{
+    display:flex;
+    gap:15px;
+    margin-bottom:15px;
+    font-size:0.8rem;
+    color:var(--text-muted);
+}
+
+.publication-meta i{
+    color:var(--gold);
+    margin-right:3px;
+}
+
+.publication-content p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.download-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--green);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.9rem;
+    transition:.3s;
+}
+
+.download-btn:hover{
+    color:var(--gold);
+    gap:12px;
+}
+
+/* ==========================
+   DIGITAL LIBRARY
+========================== */
+
+.digital-library{
+    padding:120px 8%;
+    background:var(--bg);
+}
+
+.library-search{
+    max-width:600px;
+    margin:0 auto 50px;
+    position:relative;
+}
+
+.library-search input{
+    width:100%;
+    padding:16px 50px 16px 20px;
+    border:2px solid var(--border);
+    border-radius:50px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:1rem;
+    outline:none;
+    transition:.3s;
+}
+
+[data-theme="dark"] .library-search input{
+    background:var(--card);
+}
+
+.library-search input:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(247,183,51,.1);
+}
+
+.library-search button{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:50%;
+    width:40px;
+    height:40px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.library-search button:hover{
+    background:var(--gold);
+    color:var(--black);
+}
+
+.library-items{
+    display:grid;
+    gap:20px;
+}
+
+.library-item{
+    background:var(--card);
+    padding:25px;
+    border-radius:12px;
+    border-left:4px solid var(--green);
+    box-shadow:0 5px 20px var(--shadow);
+    transition:.4s;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.library-item:hover{
+    transform:translateX(10px);
+    box-shadow:0 15px 40px rgba(14,93,70,.15);
+}
+
+.library-details h4{
+    font-size:1.1rem;
+    color:var(--text);
+    margin-bottom:5px;
+}
+
+.library-meta{
+    color:var(--text-muted);
+    font-size:0.85rem;
+    display:flex;
+    gap:15px;
+    margin-top:8px;
+}
+
+.library-action{
+    display:flex;
+    gap:12px;
+}
+
+.lib-btn{
+    padding:10px 20px;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:0.9rem;
+    font-weight:600;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+}
+
+.lib-btn:hover{
+    background:var(--gold);
+    color:var(--black);
+}
+
+/* ==========================
+   DOWNLOAD SECTION
+========================== */
+
+.download-section{
+    padding:120px 8%;
+    background:var(--bg-alt);
+}
+
+.download-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:30px;
+}
+
+.download-card{
+    background:var(--card);
+    padding:40px 30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+    border:1px solid var(--border);
+    transition:.4s;
+}
+
+.download-card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+    border-color:var(--gold);
+}
+
+.download-icon{
+    font-size:3rem;
+    color:var(--green);
+    margin-bottom:15px;
+}
+
+.download-card h3{
+    font-size:1.2rem;
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.download-card p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.download-main-btn{
+    padding:14px 30px;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+}
+
+.download-main-btn:hover{
+    background:var(--gold);
+    color:var(--black);
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+    background:var(--black);
+    color:white;
+    padding:80px 8% 30px;
+    position:relative;
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:8px;
+    background:repeating-linear-gradient(
+        90deg, var(--green) 0px, var(--green) 30px, 
+        var(--gold) 30px, var(--gold) 60px, 
+        var(--orange) 60px, var(--orange) 90px
+    );
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.5fr;
+    gap:40px;
+    margin-bottom:50px;
+}
+
+.footer-col h3{
+    font-size:1.5rem;
+    margin-bottom:20px;
+    color:var(--gold);
+}
+
+.footer-col p{
+    color:#aaa;
+    line-height:1.8;
+    margin-bottom:20px;
+    font-size:0.95rem;
+}
+
+.footer-col h4{
+    font-size:1.1rem;
+    margin-bottom:20px;
+    color:white;
+}
+
+.footer-col ul{
+    list-style:none;
+}
+
+.footer-col ul li{
+    margin-bottom:12px;
+}
+
+.footer-col ul li a{
+    color:#aaa;
+    text-decoration:none;
+    transition:.3s;
+    font-size:0.95rem;
+}
+
+.footer-col ul li a:hover{
+    color:var(--gold);
+    padding-left:5px;
+}
+
+.newsletter input{
+    width:100%;
+    padding:12px 15px;
+    background:#222;
+    border:1px solid #333;
+    border-radius:5px;
+    color:white;
+    margin-bottom:10px;
+    outline:none;
+    transition:.3s;
+}
+
+.newsletter input:focus{
+    border-color:var(--gold);
+}
+
+.newsletter button{
+    width:100%;
+    padding:12px;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.newsletter button:hover{
+    background:var(--gold);
+    color:black;
+}
+
+.footer-bottom{
+    border-top:1px solid #222;
+    padding-top:20px;
+    text-align:center;
+    color:#666;
+    font-size:0.9rem;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:1200px){
+    nav{ gap:20px; }
+    nav a{ font-size:0.9rem; }
+}
+
+@media(max-width:1024px){
+    nav{ display:none; }
+    .menu-toggle{ display:flex; }
+    
+    .logo img{
+        height:45px;
+    }
+}
+
+@media(max-width:900px){
+    nav.active{
+        display:flex;
+        position:fixed;
+        top:0;
+        right:0;
+        width:70%;
+        height:100vh;
+        background:var(--card);
+        flex-direction:column;
+        padding:100px 40px;
+        box-shadow:-5px 0 20px rgba(0,0,0,.1);
+        z-index:1000;
+    }
+
+    nav.active a{ color:var(--text); font-size:1.1rem; }
+
+    .dropdown-content{
+        position:static;
+        display:none;
+        opacity:1;
+        transform:none;
+        box-shadow:none;
+        margin-top:10px;
+        padding-left:20px;
+    }
+
+    .dropdown.active .dropdown-content{ display:block; }
+
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    
+    .join-btn span{ display:none; }
+    .join-btn{ padding:10px 15px; }
+    
+    .resources-hero{
+        padding:80px 5% 60px;
+    }
+    
+    .hero-content h1{
+        font-size:clamp(2rem, 5vw, 3.5rem);
+    }
+    
+    .logo img{
+        height:40px;
+    }
+
+    .library-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .library-action{
+        width:100%;
+        margin-top:15px;
+    }
+}
+
+@media(max-width:600px){
+    header{ padding:12px 5%; }
+    header.scrolled{ padding:10px 5%; }
+    
+    .resources-hero{
+        padding:60px 5% 50px;
+    }
+    
+    .hero-content h1{ font-size:2rem; }
+    .hero-content p{ font-size:1rem; }
+
+    .resource-categories, .gallery-section, .publications-section, 
+    .digital-library, .download-section{ 
+        padding:60px 5%; 
+    }
+
+    .footer-grid{ grid-template-columns:1fr; gap:30px; }
+    
+    .icon-btn{ width:36px; height:36px; font-size:0.85rem; }
+    .join-btn{ padding:8px 12px; font-size:0.8rem; }
+    
+    .gallery-grid{
+        grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+        gap:15px;
+    }
+
+    .gallery-item{
+        height:200px;
+    }
+
+    .gallery-filters{
+        gap:10px;
+    }
+
+    .filter-btn{
+        padding:8px 15px;
+        font-size:0.85rem;
+    }
+    
+    .logo img{
+        height:35px;
+    }
+
+    .section-header h2{
+        font-size:1.8rem;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+        <input type="text" placeholder="Search resources..." autofocus>
+        <button class="search-close" onclick="toggleSearch()"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header id="header">
+    <div class="logo">
+        <img src="Row.png" alt="Pabwalo Logo">
+    </div>
+
+    <nav id="nav">
+        <a href="index.html">Home</a>
+
+        <div class="dropdown">
+            <a href="about.html">About</a>  
+            <div class="dropdown-content">
+                <a href="about.html#story">Our Story</a>
+                <a href="about.html#mission">Mission & Vision</a>
+                <a href="about.html#team">Team</a>
+                <a href="about.html#values">Values</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="index.html#programs">Programs</a>
+            <div class="dropdown-content">
+                <a href="#">Nthano za Malawi</a>
+                <a href="#">Creative Arts Lab</a>
+                <a href="#">Future Thinkers Forum</a>
+                <a href="#">Community Cinema</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="index.html#news">News & Events</a>
+            <div class="dropdown-content">
+                <a href="#">Latest News</a>
+                <a href="#">Upcoming Events</a>
+                <a href="#">Press Releases</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="resources.html">Resources</a>
+            <div class="dropdown-content">
+                <a href="#gallery">Photo Gallery</a>
+                <a href="#publications">Publications</a>
+                <a href="#library">Digital Library</a>
+                <a href="#downloads">Downloads</a>
+            </div>
+        </div>
+
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn" onclick="toggleSearch()" title="Search">
+            <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+        <a href="#" class="join-btn">
+            <i class="fas fa-users"></i>
+            <span>Join Community</span>
+        </a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- RESOURCES HERO -->
+<section class="resources-hero">
+    <div class="hero-content fade-in">
+        <span>Explore & Learn</span>
+        <h1>Resources</h1>
+        <p>Access our collection of photos, publications, digital materials, and educational content to deepen your understanding of our work and culture.</p>
+    </div>
+</section>
+
+<!-- RESOURCE CATEGORIES -->
+<section class="resource-categories">
+    <div class="section-header fade-in">
+        <span>Browse</span>
+        <h2>What We Offer</h2>
+    </div>
+    <div class="categories-grid">
+        <div class="category-card fade-in">
+            <div class="category-icon">
+                <i class="fas fa-images"></i>
+            </div>
+            <h3>Photo Gallery</h3>
+            <p>Visual moments from events, programs, and community gatherings.</p>
+            <div class="category-count">150+ photos</div>
+        </div>
+
+        <div class="category-card fade-in">
+            <div class="category-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h3>Publications</h3>
+            <p>Research papers, reports, and essays on culture and innovation.</p>
+            <div class="category-count">25+ items</div>
+        </div>
+
+        <div class="category-card fade-in">
+            <div class="category-icon">
+                <i class="fas fa-compact-disc"></i>
+            </div>
+            <h3>Digital Library</h3>
+            <p>Stories, audio recordings, videos, and digital collections.</p>
+            <div class="category-count">300+ resources</div>
+        </div>
+
+        <div class="category-card fade-in">
+            <div class="category-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            <h3>Downloadables</h3>
+            <p>Templates, guides, toolkits, and educational materials.</p>
+            <div class="category-count">40+ files</div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section class="gallery-section" id="gallery">
+    <div class="section-header fade-in">
+        <span>Visual Stories</span>
+        <h2>Photo Gallery</h2>
+    </div>
+
+    <div class="gallery-filters fade-in">
+        <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+        <button class="filter-btn" onclick="filterGallery('events')">Events</button>
+        <button class="filter-btn" onclick="filterGallery('programs')">Programs</button>
+        <button class="filter-btn" onclick="filterGallery('community')">Community</button>
+        <button class="filter-btn" onclick="filterGallery('arts')">Arts</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-item fade-in" data-category="events">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Community Gathering</h4>
+                    <p>June 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="programs">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Arts Workshop</h4>
+                    <p>May 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="community">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Youth Training</h4>
+                    <p>April 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="arts">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Cultural Exhibition</h4>
+                    <p>March 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="events">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Film Night</h4>
+                    <p>February 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="programs">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Storytelling Session</h4>
+                    <p>January 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="community">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Community Project</h4>
+                    <p>December 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-category="arts">
+            <div class="gallery-image">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="gallery-overlay">
+                <div class="gallery-info">
+                    <h4>Artist Showcase</h4>
+                    <p>November 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PUBLICATIONS SECTION -->
+<section class="publications-section" id="publications">
+    <div class="section-header fade-in">
+        <span>Knowledge Base</span>
+        <h2>Publications & Reports</h2>
+    </div>
+
+    <div class="publications-grid">
+        <div class="publication-card fade-in">
+            <div class="publication-image">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <div class="publication-content">
+                <div class="publication-type">Research</div>
+                <h3>Culture and Digital Literacy in Malawi</h3>
+                <div class="publication-meta">
+                    <span><i class="fas fa-calendar"></i>June 2024</span>
+                    <span><i class="fas fa-user"></i>Pabwalo Team</span>
+                </div>
+                <p>A comprehensive study on the intersection of cultural preservation and digital innovation in contemporary Malawi.</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="publication-card fade-in">
+            <div class="publication-image">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <div class="publication-content">
+                <div class="publication-type">Report</div>
+                <h3>Annual Impact Report 2024</h3>
+                <div class="publication-meta">
+                    <span><i class="fas fa-calendar"></i>May 2024</span>
+                    <span><i class="fas fa-user"></i>Pabwalo</span>
+                </div>
+                <p>A detailed overview of our achievements, programs, and community impact throughout the past year.</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download Report
+                </a>
+            </div>
+        </div>
+
+        <div class="publication-card fade-in">
+            <div class="publication-image">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <div class="publication-content">
+                <div class="publication-type">Essay Collection</div>
+                <h3>Voices from Our Community</h3>
+                <div class="publication-meta">
+                    <span><i class="fas fa-calendar"></i>April 2024</span>
+                    <span><i class="fas fa-user"></i>Contributors</span>
+                </div>
+                <p>Personal essays and reflections from community members about culture, identity, and innovation.</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Read More
+                </a>
+            </div>
+        </div>
+
+        <div class="publication-card fade-in">
+            <div class="publication-image">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <div class="publication-content">
+                <div class="publication-type">Toolkit</div>
+                <h3>Digital Storytelling Guide</h3>
+                <div class="publication-meta">
+                    <span><i class="fas fa-calendar"></i>March 2024</span>
+                    <span><i class="fas fa-user"></i>Pabwalo</span>
+                </div>
+                <p>A practical guide for capturing and sharing stories using digital tools and platforms.</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download Guide
+                </a>
+            </div>
+        </div>
+
+        <div class="publication-card fade-in">
+            <div class="publication-image">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <div class="publication-content">
+                <div class="publication-type">Newsletter</div>
+                <h3>Pabwalo Monthly Digest</h3>
+                <div class="publication-meta">
+                    <span><i class="fas fa-calendar"></i>Ongoing</span>
+                    <span><i class="fas fa-user"></i>Editorial Team</span>
+                </div>
+                <p>Stay informed with our monthly updates on events, stories, and cultural insights from the community.</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Subscribe
+                </a>
+            </div>
+        </div>
+
+        <div class="publication-card fade-in">
+            <div class="publication-image">
+                <i class="fas fa-video"></i>
+            </div>
+            <div class="publication-content">
+                <div class="publication-type">Documentary</div>
+                <h3>Stories Across Generations</h3>
+                <div class="publication-meta">
+                    <span><i class="fas fa-calendar"></i>February 2024</span>
+                    <span><i class="fas fa-user"></i>Film Team</span>
+                </div>
+                <p>A documentary exploring intergenerational storytelling and cultural preservation initiatives.</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Watch Now
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DIGITAL LIBRARY -->
+<section class="digital-library" id="library">
+    <div class="section-header fade-in">
+        <span>Archive</span>
+        <h2>Digital Library</h2>
+    </div>
+
+    <div class="library-search fade-in">
+        <input type="text" placeholder="Search our digital collection...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="library-items">
+        <div class="library-item fade-in">
+            <div class="library-details">
+                <h4><i class="fas fa-audio-file" style="margin-right:10px; color:var(--green);"></i>Oral History: Voices of Elder Storytellers</h4>
+                <div class="library-meta">
+                    <span><i class="fas fa-headphones"></i>Audio Collection</span>
+                    <span><i class="fas fa-calendar"></i>2024</span>
+                    <span><i class="fas fa-clock"></i>4 hours 30 min</span>
+                </div>
+            </div>
+            <div class="library-action">
+                <a href="#" class="lib-btn"><i class="fas fa-play"></i>Listen</a>
+                <a href="#" class="lib-btn"><i class="fas fa-download"></i>Download</a>
+            </div>
+        </div>
+
+        <div class="library-item fade-in">
+            <div class="library-details">
+                <h4><i class="fas fa-video" style="margin-right:10px; color:var(--green);"></i>Cultural Practices Documentation Series</h4>
+                <div class="library-meta">
+                    <span><i class="fas fa-film"></i>Video Collection</span>
+                    <span><i class="fas fa-calendar"></i>2023-2024</span>
+                    <span><i class="fas fa-clock"></i>12 episodes</span>
+                </div>
+            </div>
+            <div class="library-action">
+                <a href="#" class="lib-btn"><i class="fas fa-play"></i>Watch</a>
+                <a href="#" class="lib-btn"><i class="fas fa-download"></i>Download</a>
+            </div>
+        </div>
+
+        <div class="library-item fade-in">
+            <div class="library-details">
+                <h4><i class="fas fa-book" style="margin-right:10px; color:var(--green);"></i>Digital Archive of Traditional Proverbs</h4>
+                <div class="library-meta">
+                    <span><i class="fas fa-file-text"></i>Text Collection</span>
+                    <span><i class="fas fa-calendar"></i>Ongoing</span>
+                    <span><i class="fas fa-layer-group"></i>500+ proverbs</span>
+                </div>
+            </div>
+            <div class="library-action">
+                <a href="#" class="lib-btn"><i class="fas fa-book-open"></i>Browse</a>
+                <a href="#" class="lib-btn"><i class="fas fa-download"></i>Export</a>
+            </div>
+        </div>
+
+        <div class="library-item fade-in">
+            <div class="library-details">
+                <h4><i class="fas fa-image" style="margin-right:10px; color:var(--green);"></i>Art & Craft Heritage Photo Repository</h4>
+                <div class="library-meta">
+                    <span><i class="fas fa-images"></i>Photo Collection</span>
+                    <span><i class="fas fa-calendar"></i>2020-2024</span>
+                    <span><i class="fas fa-layer-group"></i>800+ images</span>
+                </div>
+            </div>
+            <div class="library-action">
+                <a href="#" class="lib-btn"><i class="fas fa-eye"></i>View</a>
+                <a href="#" class="lib-btn"><i class="fas fa-download"></i>Download</a>
+            </div>
+        </div>
+
+        <div class="library-item fade-in">
+            <div class="library-details">
+                <h4><i class="fas fa-music" style="margin-right:10px; color:var(--green);"></i>Traditional Music & Songs Database</h4>
+                <div class="library-meta">
+                    <span><i class="fas fa-compact-disc"></i>Audio Archive</span>
+                    <span><i class="fas fa-calendar"></i>2021-2024</span>
+                    <span><i class="fas fa-layer-group"></i>150+ recordings</span>
+                </div>
+            </div>
+            <div class="library-action">
+                <a href="#" class="lib-btn"><i class="fas fa-play"></i>Play</a>
+                <a href="#" class="lib-btn"><i class="fas fa-download"></i>Download</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DOWNLOAD SECTION -->
+<section class="download-section" id="downloads">
+    <div class="section-header fade-in">
+        <span>Get Materials</span>
+        <h2>Downloadable Resources</h2>
+    </div>
+
+    <div class="download-grid">
+        <div class="download-card fade-in">
+            <div class="download-icon">
+                <i class="fas fa-file-word"></i>
+            </div>
+            <h3>Program Templates</h3>
+            <p>Ready-to-use templates for organizing storytelling sessions, arts workshops, and community events.</p>
+            <a href="#" class="download-main-btn">
+                <i class="fas fa-download"></i>
+                Download Templates
+            </a>
+        </div>
+
+        <div class="download-card fade-in">
+            <div class="download-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Educational Guides</h3>
+            <p>Comprehensive guides for educators and facilitators on cultural education and digital literacy.</p>
+            <a href="#" class="download-main-btn">
+                <i class="fas fa-download"></i>
+                Download Guides
+            </a>
+        </div>
+
+        <div class="download-card fade-in">
+            <div class="download-icon">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3>Presentation Decks</h3>
+            <p>PowerPoint presentations about our programs, impact, and cultural mission for various audiences.</p>
+            <a href="#" class="download-main-btn">
+                <i class="fas fa-download"></i>
+                Download Decks
+            </a>
+        </div>
+
+        <div class="download-card fade-in">
+            <div class="download-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <h3>Partnership Toolkit</h3>
+            <p>Complete toolkit for potential partners including guidelines, proposals, and collaboration frameworks.</p>
+            <a href="#" class="download-main-btn">
+                <i class="fas fa-download"></i>
+                Download Toolkit
+            </a>
+        </div>
+
+        <div class="download-card fade-in">
+            <div class="download-icon">
+                <i class="fas fa-image"></i>
+            </div>
+            <h3>Brand Assets</h3>
+            <p>Logo files, color guidelines, and other brand materials for authorized use in partnerships.</p>
+            <a href="#" class="download-main-btn">
+                <i class="fas fa-download"></i>
+                Download Assets
+            </a>
+        </div>
+
+        <div class="download-card fade-in">
+            <div class="download-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h3>Workshop Curriculum</h3>
+            <p>Full curriculum modules for arts, digital literacy, and storytelling workshops.</p>
+            <a href="#" class="download-main-btn">
+                <i class="fas fa-download"></i>
+                Download Curriculum
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>◉ PABWALO</h3>
+            <p>Empowering communities through culture, creativity, technology, and lifelong learning. The future is rooted in our heritage.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="index.html#news">News & Events</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Partner</a></li>
+                <li><a href="#">Volunteer</a></li>
+                <li><a href="#">Press</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Stay Updated</h4>
+            <p>Join our newsletter for event updates and cultural insights.</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Your email address">
+                <button>Subscribe →</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Pabwalo Cultural Hub. Designed with ❤️ for Malawi's Future.</p>
+    </div>
+</footer>
+
+<script>
+// ==========================
+// HEADER SCROLL
+// ==========================
+
+window.addEventListener("scroll",()=>{
+    const header = document.getElementById("header");
+    header.classList.toggle("scrolled", window.scrollY > 50);
+});
+
+// ==========================
+// MOBILE MENU
+// ==========================
+
+function toggleMenu(){
+    document.getElementById("nav").classList.toggle("active");
+}
+
+document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.getElementById("nav").classList.remove("active");
+    });
+});
+
+document.querySelectorAll(".dropdown").forEach(dropdown => {
+    dropdown.addEventListener("click", function(){
+        if(window.innerWidth <= 1024) this.classList.toggle("active");
+    });
+});
+
+// ==========================
+// SEARCH TOGGLE
+// ==========================
+
+function toggleSearch(){
+    const overlay = document.getElementById("searchOverlay");
+    overlay.classList.toggle("active");
+    if(overlay.classList.contains("active")){
+        overlay.querySelector("input").focus();
+    }
+}
+
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape"){
+        document.getElementById("searchOverlay").classList.remove("active");
+    }
+});
+
+// ==========================
+// THEME TOGGLE
+// ==========================
+
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = themeToggle.querySelector("i");
+
+const savedTheme = localStorage.getItem("theme") || "light";
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeIcon.className = savedTheme === "dark" ? "fas fa-sun" : "fas fa-moon";
+
+themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    themeIcon.className = next === "dark" ? "fas fa-sun" : "fas fa-moon";
+});
+
+// ==========================
+// GALLERY FILTER
+// ==========================
+
+function filterGallery(category){
+    const items = document.querySelectorAll('.gallery-item');
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    items.forEach(item => {
+        if(category === 'all' || item.getAttribute('data-category') === category){
+            item.style.display = 'block';
+            setTimeout(() => item.classList.add('visible'), 10);
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// ==========================
+// SCROLL REVEAL
+// ==========================
+
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+    });
+}, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+document.querySelectorAll('.fade-in').forEach(el => appearOnScroll.observe(el));
+</script>
+
+</body>
+</html>
