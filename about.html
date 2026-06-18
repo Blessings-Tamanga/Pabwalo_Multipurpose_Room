@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Pabwalo | Our Story & Mission</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+:root{
+    --green:#0E5D46;
+    --gold:#F7B733;
+    --orange:#D97706;
+    --brown:#6B4226;
+    --black:#111111;
+    --white:#ffffff;
+    --bg:#ffffff;
+    --bg-alt:#f9f9f9;
+    --text:#111111;
+    --text-muted:#555555;
+    --card:#ffffff;
+    --border:#e0e0e0;
+    --shadow:rgba(0,0,0,.08);
+}
+
+[data-theme="dark"]{
+    --bg:#0d0d0d;
+    --bg-alt:#1a1a1a;
+    --text:#ffffff;
+    --text-muted:#aaaaaa;
+    --card:#1a1a1a;
+    --border:#2a2a2a;
+    --shadow:rgba(0,0,0,.4);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    transition:background .4s, color .4s;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:15px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:.4s;
+    background:transparent;
+}
+
+header.scrolled{
+    background:var(--card);
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    padding:12px 8%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    z-index:1001;
+}
+
+.logo img{
+    height:50px;
+    width:auto;
+    object-fit:contain;
+    transition:.3s;
+    filter:brightness(0) invert(1);
+}
+
+header.scrolled .logo img{
+    filter:none;
+}
+
+nav{
+    display:flex;
+    gap:35px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    transition:.3s;
+    position:relative;
+    font-size:0.95rem;
+}
+
+header.scrolled nav a{
+    color:var(--text);
+}
+
+nav a:hover{
+    color:var(--gold);
+}
+
+.dropdown{
+    position:relative;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:var(--card);
+    min-width:220px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:10px;
+    opacity:0;
+    transform:translateY(-10px);
+    transition:all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+}
+
+.dropdown-content a{
+    color:var(--text);
+    padding:12px 20px;
+    display:block;
+    border-bottom:1px solid var(--border);
+    font-weight:400;
+    font-size:0.9rem;
+}
+
+.dropdown-content a:last-child{
+    border-bottom:none;
+}
+
+.dropdown-content a:hover{
+    background:var(--green);
+    color:white;
+    padding-left:25px;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    z-index:1001;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(255,255,255,.1);
+    color:white;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+    font-size:0.95rem;
+}
+
+header.scrolled .icon-btn{
+    background:var(--bg-alt);
+    border-color:var(--border);
+    color:var(--text);
+}
+
+.icon-btn:hover{
+    background:var(--gold);
+    color:var(--black);
+    border-color:var(--gold);
+    transform:translateY(-2px);
+}
+
+.join-btn{
+    padding:10px 22px;
+    background:var(--gold);
+    color:var(--black);
+    border:none;
+    border-radius:50px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-size:0.9rem;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+
+.join-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(247,183,51,.3);
+}
+
+.search-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    backdrop-filter:blur(10px);
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:opacity .3s;
+}
+
+.search-overlay.active{
+    display:flex;
+    opacity:1;
+}
+
+.search-box{
+    width:90%;
+    max-width:700px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:20px 60px 20px 25px;
+    font-size:1.3rem;
+    border:none;
+    border-radius:50px;
+    background:var(--card);
+    color:var(--text);
+    outline:none;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.search-close{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    font-size:1.5rem;
+    color:var(--text-muted);
+    cursor:pointer;
+}
+
+.search-close:hover{
+    color:var(--gold);
+}
+
+.menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    z-index:1001;
+}
+
+.menu-toggle span{
+    width:25px;
+    height:3px;
+    background:white;
+    transition:.3s;
+    border-radius:3px;
+}
+
+header.scrolled .menu-toggle span{
+    background:var(--text);
+}
+
+/* ==========================
+   ABOUT HERO
+========================== */
+
+.about-hero{
+    position:relative;
+    width:100%;
+    min-height:60vh;
+    display:flex;
+    align-items:center;
+    padding:120px 8% 80px;
+    background:linear-gradient(135deg, var(--green) 0%, var(--brown) 100%);
+    overflow:hidden;
+}
+
+.about-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(circle at 20% 80%, rgba(247,183,51,.15), transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(247,183,51,.1), transparent 50%);
+    z-index:1;
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+    color:white;
+}
+
+.hero-content span{
+    display:inline-block;
+    color:var(--gold);
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    margin-bottom:15px;
+}
+
+.hero-content h1{
+    font-size:clamp(2.5rem, 6vw, 5rem);
+    line-height:1.1;
+    margin-bottom:20px;
+    font-weight:800;
+}
+
+.hero-content p{
+    font-size:1.1rem;
+    line-height:1.8;
+    opacity:0.95;
+    max-width:600px;
+}
+
+/* ==========================
+   ABOUT INTRO
+========================== */
+
+.about-intro{
+    padding:120px 8%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+.about-intro-image{
+    position:relative;
+    height:500px;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 60px var(--shadow);
+}
+
+.about-intro-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.about-intro-image:hover img{
+    transform:scale(1.05);
+}
+
+.about-intro-image::after{
+    content:"";
+    position:absolute;
+    bottom:-20px;
+    right:-20px;
+    width:150px;
+    height:150px;
+    background:repeating-linear-gradient(
+        45deg, var(--gold), var(--gold) 2px, 
+        transparent 2px, transparent 15px
+    );
+    z-index:-1;
+    border-radius:20px;
+    opacity:0.6;
+}
+
+.about-intro-content span{
+    color:var(--green);
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+}
+
+.about-intro-content h2{
+    font-size:2.5rem;
+    margin:15px 0 30px;
+    line-height:1.2;
+    color:var(--text);
+}
+
+.about-intro-content p{
+    color:var(--text-muted);
+    line-height:1.8;
+    margin-bottom:20px;
+    font-size:1rem;
+}
+
+/* ==========================
+   MISSION & VISION
+========================== */
+
+.mission-vision{
+    padding:120px 8%;
+    background:var(--bg-alt);
+}
+
+.section-header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-header span{
+    color:var(--orange);
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+}
+
+.section-header h2{
+    font-size:2.5rem;
+    margin-top:10px;
+    color:var(--text);
+}
+
+.mv-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+}
+
+.mv-card{
+    background:var(--card);
+    padding:50px 40px;
+    border-radius:15px;
+    box-shadow:0 10px 30px var(--shadow);
+    border:1px solid var(--border);
+    transition:.4s;
+}
+
+.mv-card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+    border-color:var(--gold);
+}
+
+.mv-card h3{
+    font-size:1.8rem;
+    color:var(--gold);
+    margin-bottom:20px;
+}
+
+.mv-card p{
+    color:var(--text-muted);
+    line-height:1.8;
+    font-size:0.95rem;
+}
+
+/* ==========================
+   TIMELINE / JOURNEY
+========================== */
+
+.journey{
+    padding:120px 8%;
+    background:var(--bg);
+}
+
+.timeline{
+    position:relative;
+    max-width:900px;
+    margin:0 auto;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:linear-gradient(180deg, var(--green), var(--gold), var(--orange));
+    transform:translateX(-50%);
+}
+
+.timeline-item{
+    margin-bottom:50px;
+    position:relative;
+}
+
+.timeline-item:nth-child(odd) .timeline-content{
+    margin-left:0;
+    margin-right:calc(50% + 40px);
+    text-align:right;
+}
+
+.timeline-item:nth-child(even) .timeline-content{
+    margin-left:calc(50% + 40px);
+    margin-right:0;
+    text-align:left;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:25px;
+    height:25px;
+    background:var(--gold);
+    border:4px solid var(--card);
+    border-radius:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 0 4px var(--green);
+    z-index:2;
+}
+
+.timeline-content{
+    background:var(--card);
+    padding:30px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    box-shadow:0 5px 20px var(--shadow);
+    transition:.4s;
+}
+
+.timeline-content:hover{
+    box-shadow:0 15px 40px rgba(14,93,70,.15);
+    border-color:var(--gold);
+}
+
+.timeline-year{
+    color:var(--green);
+    font-weight:700;
+    font-size:1.2rem;
+    margin-bottom:8px;
+}
+
+.timeline-content h4{
+    color:var(--text);
+    font-size:1.1rem;
+    margin-bottom:10px;
+}
+
+.timeline-content p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.6;
+}
+
+/* ==========================
+   CORE VALUES
+========================== */
+
+.values{
+    padding:120px 8%;
+    background:var(--bg-alt);
+}
+
+.values-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:30px;
+}
+
+.value-card{
+    background:var(--card);
+    padding:40px 30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+    border:1px solid var(--border);
+    transition:.4s;
+}
+
+.value-card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+    border-color:var(--gold);
+}
+
+.value-icon{
+    width:80px;
+    height:80px;
+    background:linear-gradient(135deg, var(--green), var(--brown));
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:2.5rem;
+    margin:0 auto 25px;
+}
+
+.value-card h3{
+    font-size:1.3rem;
+    color:var(--text);
+    margin-bottom:15px;
+}
+
+.value-card p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.7;
+}
+
+/* ==========================
+   IMPACT STATS
+========================== */
+
+.impact-stats{
+    padding:120px 8%;
+    background:linear-gradient(135deg, var(--green) 0%, var(--brown) 100%);
+    color:white;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:40px;
+}
+
+.stat-box{
+    text-align:center;
+}
+
+.stat-number{
+    font-size:clamp(2.5rem, 8vw, 4rem);
+    font-weight:800;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:10px;
+}
+
+.stat-label{
+    font-size:1.1rem;
+    opacity:0.95;
+    font-weight:500;
+}
+
+.stat-description{
+    font-size:0.9rem;
+    opacity:0.8;
+    margin-top:10px;
+}
+
+/* ==========================
+   TEAM SECTION
+========================== */
+
+.team{
+    padding:120px 8%;
+    background:var(--bg);
+}
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:30px;
+}
+
+.team-card{
+    background:var(--card);
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 30px var(--shadow);
+    transition:.4s;
+    border:1px solid var(--border);
+}
+
+.team-card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 50px rgba(14,93,70,.15);
+}
+
+.team-image{
+    width:100%;
+    height:350px;
+    background:linear-gradient(135deg, var(--green), var(--brown));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    color:white;
+    font-size:4rem;
+}
+
+.team-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.team-card:hover .team-image img{
+    transform:scale(1.1);
+}
+
+.team-info{
+    padding:25px;
+    text-align:center;
+}
+
+.team-info h3{
+    font-size:1.3rem;
+    color:var(--text);
+    margin-bottom:5px;
+}
+
+.team-role{
+    color:var(--gold);
+    font-weight:600;
+    font-size:0.9rem;
+    margin-bottom:15px;
+}
+
+.team-bio{
+    color:var(--text-muted);
+    font-size:0.85rem;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.team-socials{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+}
+
+.team-social-btn{
+    width:35px;
+    height:35px;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.8rem;
+    transition:.3s;
+}
+
+.team-social-btn:hover{
+    background:var(--gold);
+    color:var(--black);
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   WHY CHOOSE US
+========================== */
+
+.why-choose{
+    padding:120px 8%;
+    background:var(--bg-alt);
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:40px;
+}
+
+.why-item{
+    text-align:center;
+}
+
+.why-number{
+    font-size:3.5rem;
+    font-weight:800;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:15px;
+}
+
+.why-item h3{
+    font-size:1.3rem;
+    color:var(--text);
+    margin-bottom:15px;
+}
+
+.why-item p{
+    color:var(--text-muted);
+    font-size:0.95rem;
+    line-height:1.7;
+}
+
+/* ==========================
+   CTA SECTION
+========================== */
+
+.cta-section{
+    padding:100px 8%;
+    background:linear-gradient(135deg, var(--green) 0%, var(--brown) 100%);
+    color:white;
+    text-align:center;
+    border-radius:20px;
+    margin:120px 8%;
+}
+
+.cta-section h2{
+    font-size:2.5rem;
+    margin-bottom:20px;
+}
+
+.cta-section p{
+    font-size:1.1rem;
+    margin-bottom:40px;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+    opacity:0.95;
+}
+
+.cta-buttons{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.cta-btn{
+    padding:16px 40px;
+    border:none;
+    border-radius:50px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:0.95rem;
+    text-decoration:none;
+}
+
+.cta-btn.primary{
+    background:var(--gold);
+    color:var(--black);
+}
+
+.cta-btn.primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(247,183,51,.3);
+}
+
+.cta-btn.secondary{
+    background:transparent;
+    color:white;
+    border:2px solid white;
+}
+
+.cta-btn.secondary:hover{
+    background:white;
+    color:var(--black);
+    border-color:white;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+    background:var(--black);
+    color:white;
+    padding:80px 8% 30px;
+    position:relative;
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:8px;
+    background:repeating-linear-gradient(
+        90deg, var(--green) 0px, var(--green) 30px, 
+        var(--gold) 30px, var(--gold) 60px, 
+        var(--orange) 60px, var(--orange) 90px
+    );
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.5fr;
+    gap:40px;
+    margin-bottom:50px;
+}
+
+.footer-col h3{
+    font-size:1.5rem;
+    margin-bottom:20px;
+    color:var(--gold);
+}
+
+.footer-col p{
+    color:#aaa;
+    line-height:1.8;
+    margin-bottom:20px;
+    font-size:0.95rem;
+}
+
+.footer-col h4{
+    font-size:1.1rem;
+    margin-bottom:20px;
+    color:white;
+}
+
+.footer-col ul{
+    list-style:none;
+}
+
+.footer-col ul li{
+    margin-bottom:12px;
+}
+
+.footer-col ul li a{
+    color:#aaa;
+    text-decoration:none;
+    transition:.3s;
+    font-size:0.95rem;
+}
+
+.footer-col ul li a:hover{
+    color:var(--gold);
+    padding-left:5px;
+}
+
+.newsletter input{
+    width:100%;
+    padding:12px 15px;
+    background:#222;
+    border:1px solid #333;
+    border-radius:5px;
+    color:white;
+    margin-bottom:10px;
+    outline:none;
+    transition:.3s;
+}
+
+.newsletter input:focus{
+    border-color:var(--gold);
+}
+
+.newsletter button{
+    width:100%;
+    padding:12px;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.newsletter button:hover{
+    background:var(--gold);
+    color:black;
+}
+
+.footer-bottom{
+    border-top:1px solid #222;
+    padding-top:20px;
+    text-align:center;
+    color:#666;
+    font-size:0.9rem;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:1200px){
+    nav{ gap:20px; }
+    nav a{ font-size:0.9rem; }
+}
+
+@media(max-width:1024px){
+    nav{ display:none; }
+    .menu-toggle{ display:flex; }
+    
+    .about-intro{
+        grid-template-columns:1fr;
+        gap:50px;
+    }
+
+    .mv-grid{
+        grid-template-columns:1fr;
+    }
+
+    .timeline::before{
+        left:20px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content{
+        margin-left:80px;
+        margin-right:0;
+        text-align:left;
+    }
+
+    .timeline-dot{
+        left:20px;
+    }
+    
+    .logo img{
+        height:45px;
+    }
+}
+
+@media(max-width:900px){
+    nav.active{
+        display:flex;
+        position:fixed;
+        top:0;
+        right:0;
+        width:70%;
+        height:100vh;
+        background:var(--card);
+        flex-direction:column;
+        padding:100px 40px;
+        box-shadow:-5px 0 20px rgba(0,0,0,.1);
+        z-index:1000;
+    }
+
+    nav.active a{ color:var(--text); font-size:1.1rem; }
+
+    .dropdown-content{
+        position:static;
+        display:none;
+        opacity:1;
+        transform:none;
+        box-shadow:none;
+        margin-top:10px;
+        padding-left:20px;
+    }
+
+    .dropdown.active .dropdown-content{ display:block; }
+
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    
+    .join-btn span{ display:none; }
+    .join-btn{ padding:10px 15px; }
+    
+    .about-hero{
+        padding:80px 5% 60px;
+    }
+    
+    .hero-content h1{
+        font-size:clamp(2rem, 5vw, 3.5rem);
+    }
+    
+    .logo img{
+        height:40px;
+    }
+
+    .cta-section{
+        margin:80px 5%;
+    }
+}
+
+@media(max-width:600px){
+    header{ padding:12px 5%; }
+    header.scrolled{ padding:10px 5%; }
+    
+    .about-hero{
+        padding:60px 5% 50px;
+    }
+    
+    .hero-content h1{ font-size:2rem; }
+    .hero-content p{ font-size:1rem; }
+
+    .about-intro, .mission-vision, .journey, .values, .impact-stats, .team, .why-choose{ 
+        padding:60px 5%; 
+    }
+
+    .footer-grid{ grid-template-columns:1fr; gap:30px; }
+    
+    .icon-btn{ width:36px; height:36px; font-size:0.85rem; }
+    .join-btn{ padding:8px 12px; font-size:0.8rem; }
+    
+    .about-intro-image{
+        height:300px;
+    }
+
+    .mv-card{
+        padding:30px 20px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content{
+        margin-left:60px;
+    }
+
+    .timeline-dot{
+        left:10px;
+    }
+
+    .team-card{
+        max-width:100%;
+    }
+
+    .cta-section{
+        margin:60px 5%;
+        padding:60px 5%;
+    }
+
+    .cta-section h2{
+        font-size:1.8rem;
+    }
+
+    .cta-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .cta-btn{
+        width:100%;
+        justify-content:center;
+    }
+    
+    .logo img{
+        height:35px;
+    }
+
+    .section-header h2{
+        font-size:1.8rem;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+        <input type="text" placeholder="Search programs, events, news..." autofocus>
+        <button class="search-close" onclick="toggleSearch()"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header id="header">
+    <div class="logo">
+        <img src="Row.png" alt="Pabwalo Logo">
+    </div>
+
+    <nav id="nav">
+        <a href="index.html">Home</a>
+
+        <div class="dropdown">
+            <a href="about.html">About</a>
+            <div class="dropdown-content">
+                <a href="#story">Our Story</a>
+                <a href="#mission">Mission & Vision</a>
+                <a href="#team">Team</a>
+                <a href="#values">Values</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="index.html#programs">Programs</a>
+            <div class="dropdown-content">
+                <a href="#">Nthano za Malawi</a>
+                <a href="#">Creative Arts Lab</a>
+                <a href="#">Future Thinkers Forum</a>
+                <a href="#">Community Cinema</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="index.html#news">News & Events</a>
+            <div class="dropdown-content">
+                <a href="#">Latest News</a>
+                <a href="#">Upcoming Events</a>
+                <a href="#">Press Releases</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#">Resources</a>
+            <div class="dropdown-content">
+                <a href="#">Gallery</a>
+                <a href="#">Publications</a>
+                <a href="#">Digital Library</a>
+            </div>
+        </div>
+
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn" onclick="toggleSearch()" title="Search">
+            <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+        <a href="#" class="join-btn">
+            <i class="fas fa-users"></i>
+            <span>Join Community</span>
+        </a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- ABOUT HERO -->
+<section class="about-hero">
+    <div class="hero-content fade-in">
+        <span>Who We Are</span>
+        <h1>Our Story</h1>
+        <p>A journey of cultural preservation, innovation, and community empowerment. Founded to celebrate Malawi's heritage while building its future.</p>
+    </div>
+</section>
+
+<!-- ABOUT INTRO -->
+<section class="about-intro" id="story">
+    <div class="about-intro-image fade-in">
+        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop" alt="Pabwalo Community">
+    </div>
+    <div class="about-intro-content fade-in">
+        <span>The Beginning</span>
+        <h2>From Vision to Reality</h2>
+        <p>
+            Pabwalo was founded with a simple yet powerful belief: that cultural heritage and digital innovation are not contradictory forces, but complementary pathways to progress. We envisioned a space where Malawi's rich storytelling traditions could thrive alongside cutting-edge technology.
+        </p>
+        <p>
+            What started as a grassroots initiative has grown into a vibrant hub serving thousands of community members. We remain committed to our core mission: preserving our cultural identity while empowering communities to shape the future.
+        </p>
+        <a href="contact.html" class="btn primary" style="padding:16px 35px; background:var(--green); color:white; border:none; border-radius:50px; font-weight:600; cursor:pointer; transition:.3s; display:inline-block; text-decoration:none; margin-top:20px;">Partner With Us →</a>
+    </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="mission-vision" id="mission">
+    <div class="section-header fade-in">
+        <span>Our Direction</span>
+        <h2>Mission & Vision</h2>
+    </div>
+    <div class="mv-grid">
+        <div class="mv-card fade-in">
+            <h3><i class="fas fa-target" style="margin-right:15px; color:var(--orange);"></i>Our Mission</h3>
+            <p>
+                To be a vibrant cultural and educational hub that celebrates Malawi's heritage, fosters creativity, and builds digital literacy while creating safe, inclusive spaces for intergenerational learning and innovation.
+            </p>
+        </div>
+        <div class="mv-card fade-in">
+            <h3><i class="fas fa-telescope" style="margin-right:15px; color:var(--orange);"></i>Our Vision</h3>
+            <p>
+                To empower Malawian communities by bridging cultural traditions with digital innovation, creating pathways for young people to become leaders, storytellers, and changemakers rooted in their heritage.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- JOURNEY / TIMELINE -->
+<section class="journey">
+    <div class="section-header fade-in">
+        <span>Our Evolution</span>
+        <h2>Key Milestones</h2>
+    </div>
+    <div class="timeline">
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">2020</div>
+                <h4>Foundation Year</h4>
+                <p>Pabwalo is founded as a community-driven cultural initiative in Lilongwe, starting with monthly storytelling sessions.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">2021</div>
+                <h4>First Programs Launch</h4>
+                <p>Introduction of Creative Arts Lab and Nthano za Malawi series. Community reaches 500+ active members.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">2022</div>
+                <h4>Digital Integration</h4>
+                <p>Launch of digital library platform and Future Thinkers Forum. Tech skills training begins for youth.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">2023</div>
+                <h4>Community Cinema Premiere</h4>
+                <p>Opening of outdoor cinema venue. Partnerships established with 15+ cultural and educational organizations.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">2024</div>
+                <h4>National Recognition</h4>
+                <p>Awarded "Cultural Excellence Award" by Ministry of Culture. Expanded to reach 3,000+ active participants.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">2025</div>
+                <h4>Youth Leadership Initiative</h4>
+                <p>Launch of youth-led cultural ambassadors program. Plans for satellite locations in regional cities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="values" id="values">
+    <div class="section-header fade-in">
+        <span>What Drives Us</span>
+        <h2>Our Core Values</h2>
+    </div>
+    <div class="values-grid">
+        <div class="value-card fade-in">
+            <div class="value-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h3>Cultural Stewardship</h3>
+            <p>We honor Malawi's heritage and wisdom, preserving stories and traditions while making them accessible for new generations.</p>
+        </div>
+
+        <div class="value-card fade-in">
+            <div class="value-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3>Innovation</h3>
+            <p>We embrace technology as a tool to amplify cultural narratives and create solutions that serve our communities.</p>
+        </div>
+
+        <div class="value-card fade-in">
+            <div class="value-icon">
+                <i class="fas fa-people-arrows"></i>
+            </div>
+            <h3>Inclusivity</h3>
+            <p>Everyone has a voice and place at Pabwalo. We create safe, welcoming spaces for all ages, backgrounds, and abilities.</p>
+        </div>
+
+        <div class="value-card fade-in">
+            <div class="value-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Empowerment</h3>
+            <p>We equip individuals with skills, knowledge, and confidence to become leaders and change-makers in their communities.</p>
+        </div>
+    </div>
+</section>
+
+<!-- IMPACT STATS -->
+<section class="impact-stats">
+    <div class="section-header fade-in" style="color:white; margin-bottom:60px;">
+        <span style="color:var(--gold);">Our Impact</span>
+        <h2 style="color:white;">Numbers That Matter</h2>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-box fade-in">
+            <div class="stat-number">3000+</div>
+            <div class="stat-label">Active Members</div>
+            <div class="stat-description">Engaged in our programs and initiatives</div>
+        </div>
+
+        <div class="stat-box fade-in">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Programs Offered</div>
+            <div class="stat-description">Spanning arts, tech, and heritage</div>
+        </div>
+
+        <div class="stat-box fade-in">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Partner Organizations</div>
+            <div class="stat-description">Collaborating to expand our reach</div>
+        </div>
+
+        <div class="stat-box fade-in">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Stories Archived</div>
+            <div class="stat-description">Preserving our cultural memory</div>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM SECTION -->
+<section class="team" id="team">
+    <div class="section-header fade-in">
+        <span>Meet the Team</span>
+        <h2>Passionate People</h2>
+    </div>
+    <div class="team-grid">
+        <div class="team-card fade-in">
+            <div class="team-image">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="team-info">
+                <h3>Chipo Banda</h3>
+                <div class="team-role">Executive Director</div>
+                <div class="team-bio">Cultural visionary with 15+ years in heritage preservation and community development.</div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="team-social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card fade-in">
+            <div class="team-image">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="team-info">
+                <h3>Tendai Mwale</h3>
+                <div class="team-role">Programs Director</div>
+                <div class="team-bio">Educational innovator designing transformative learning experiences for youth.</div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="team-social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card fade-in">
+            <div class="team-image">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="team-info">
+                <h3>Lwazi Phiri</h3>
+                <div class="team-role">Digital Strategy Lead</div>
+                <div class="team-bio">Tech innovator bridging cultural narratives with cutting-edge digital platforms.</div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="team-social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card fade-in">
+            <div class="team-image">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="team-info">
+                <h3>Nalini Banda</h3>
+                <div class="team-role">Community Manager</div>
+                <div class="team-bio">Connector and advocate ensuring every voice is heard in our community.</div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="team-social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card fade-in">
+            <div class="team-image">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="team-info">
+                <h3>Kumbukani Munthali</h3>
+                <div class="team-role">Arts & Culture Curator</div>
+                <div class="team-bio">Storyteller and arts curator preserving and celebrating traditional expressions.</div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="team-social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card fade-in">
+            <div class="team-image">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="team-info">
+                <h3>Zainab Hassan</h3>
+                <div class="team-role">Partnerships Coordinator</div>
+                <div class="team-bio">Building bridges between Pabwalo and local, national, and international partners.</div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="team-social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-choose">
+    <div class="section-header fade-in">
+        <span>What Sets Us Apart</span>
+        <h2>Why Pabwalo</h2>
+    </div>
+    <div class="why-grid">
+        <div class="why-item fade-in">
+            <div class="why-number">01</div>
+            <h3>Rooted in Culture</h3>
+            <p>We are authentically grounded in Malawian heritage while remaining forward-thinking and innovative.</p>
+        </div>
+
+        <div class="why-item fade-in">
+            <div class="why-number">02</div>
+            <h3>Community-First</h3>
+            <p>Every decision is guided by community voices and the genuine needs of those we serve.</p>
+        </div>
+
+        <div class="why-item fade-in">
+            <div class="why-number">03</div>
+            <h3>Intergenerational</h3>
+            <p>We create spaces where elders, youth, and everyone between can learn and grow together.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section fade-in">
+    <h2>Ready to Be Part of Our Story?</h2>
+    <p>Join thousands of community members shaping the future of Malawi's cultural landscape.</p>
+    <div class="cta-buttons">
+        <a href="index.html#programs" class="cta-btn primary">
+            <i class="fas fa-play"></i>
+            Explore Programs
+        </a>
+        <a href="contact.html" class="cta-btn secondary">
+            <i class="fas fa-envelope"></i>
+            Get in Touch
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>◉ PABWALO</h3>
+            <p>Empowering communities through culture, creativity, technology, and lifelong learning. The future is rooted in our heritage.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="index.html#news">News & Events</a></li>
+                <li><a href="#">Gallery</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Partner</a></li>
+                <li><a href="#">Volunteer</a></li>
+                <li><a href="#">Press</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Stay Updated</h4>
+            <p>Join our newsletter for event updates and cultural insights.</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Your email address">
+                <button>Subscribe →</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Pabwalo Cultural Hub. Designed with ❤️ for Malawi's Future.</p>
+    </div>
+</footer>
+
+<script>
+// ==========================
+// HEADER SCROLL
+// ==========================
+
+window.addEventListener("scroll",()=>{
+    const header = document.getElementById("header");
+    header.classList.toggle("scrolled", window.scrollY > 50);
+});
+
+// ==========================
+// MOBILE MENU
+// ==========================
+
+function toggleMenu(){
+    document.getElementById("nav").classList.toggle("active");
+}
+
+document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.getElementById("nav").classList.remove("active");
+    });
+});
+
+document.querySelectorAll(".dropdown").forEach(dropdown => {
+    dropdown.addEventListener("click", function(){
+        if(window.innerWidth <= 1024) this.classList.toggle("active");
+    });
+});
+
+// ==========================
+// SEARCH TOGGLE
+// ==========================
+
+function toggleSearch(){
+    const overlay = document.getElementById("searchOverlay");
+    overlay.classList.toggle("active");
+    if(overlay.classList.contains("active")){
+        overlay.querySelector("input").focus();
+    }
+}
+
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape"){
+        document.getElementById("searchOverlay").classList.remove("active");
+    }
+});
+
+// ==========================
+// THEME TOGGLE
+// ==========================
+
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = themeToggle.querySelector("i");
+
+const savedTheme = localStorage.getItem("theme") || "light";
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeIcon.className = savedTheme === "dark" ? "fas fa-sun" : "fas fa-moon";
+
+themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    themeIcon.className = next === "dark" ? "fas fa-sun" : "fas fa-moon";
+});
+
+
+// SCROLL REVEAL
+
+
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+    });
+}, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+document.querySelectorAll('.fade-in').forEach(el => appearOnScroll.observe(el));
+</script>
+
+</body>
+</html>
